@@ -122,13 +122,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="TetronimoMaker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="SquareType.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="TetronimoMaker.h" />
   </ItemGroup>

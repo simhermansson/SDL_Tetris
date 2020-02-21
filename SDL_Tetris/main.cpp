@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
 #include "Rectangle.h"
+#include "Board.h"
 
 // Constants.
 const int SCREEN_WIDTH = 400;
@@ -18,7 +20,7 @@ SDL_Surface* gScreenSurface = NULL;
 SDL_Surface* gSplashScreen = NULL;
 
 // Game variables.
-std::vector<Rectangle> gRectangles;
+Board *board;
 
 // Function headers.
 void splashScreen();
@@ -51,13 +53,8 @@ void splashScreen() {
 }
 
 void gameLoop() {
-	// Init game objects;
-	for (int i = 0; i < GAME_HEIGHT; i++) {
-		for (int j = 0; j < GAME_WIDTH; j++) {
-			Rectangle rectangle(j * RECTANGLE_WIDTH, i * RECTANGLE_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
-			gRectangles.push_back(rectangle);
-		}
-	}
+	// Init board;
+	board = new Board(GAME_WIDTH, GAME_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
 
 	// Main game loop.
 	while (!handleInput()) {
@@ -69,10 +66,8 @@ void draw() {
 	// Clear screen.
 	SDL_FillRect(gSplashScreen, NULL, 0x000000);
 
-	// Call draw on background rectangles.
-	for (Rectangle r : gRectangles) {
-		r.draw(gScreenSurface);
-	}
+	// Call draw on board;
+	board->draw(gScreenSurface);
 
 	// Call draw on tetrominoes.
 	/*
@@ -160,6 +155,9 @@ SDL_Surface* loadSurface(const std::string& path) {
 }
 
 void close() {
+	// Free board.
+	free(board);
+
 	// Deallocate surface.
 	SDL_FreeSurface(gScreenSurface);
 	gScreenSurface = NULL;

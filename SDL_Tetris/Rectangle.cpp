@@ -8,6 +8,7 @@ Rectangle::Rectangle(int x, int y, int width, int height) {
 	this->height = height;
 
 	// Set drawing rectangle variables.
+	this->squareType = EMPTY;
 	if (!loadSurface()) {
 		printf("Failed to load rectangle surface! SDL_Error: %s\n", SDL_GetError());
 	}
@@ -35,6 +36,10 @@ void Rectangle::draw(SDL_Surface* windowSurface) {
 int Rectangle::posX() { return x; }
 
 int Rectangle::posY() { return y; }
+
+void Rectangle::setSquareType(SquareType squareType) {
+	this->squareType = squareType;
+}
 
 int Rectangle::getWidth() { return width; }
 
