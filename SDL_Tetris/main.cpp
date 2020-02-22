@@ -66,13 +66,19 @@ void gameLoop() {
 
 	// Main game loop.
 	while (!handleInput(currentTetromino)) {
-		if (!currentTetromino.fall()) {
-			currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
-		}
 		draw(currentTetromino);
 
-		// Delay for 1 second in order to facilitate a smooth 1 fps.
-		SDL_Delay(1000);
+		// Update tetromino and check for collisions.
+		if (!currentTetromino.fall(*board)) {
+			currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
+			// Check if player has lost.
+			if (currentTetromino.collision(*board)) {
+				break;
+			}
+		}
+
+		// Delay for 0.2 second in order to facilitate a smooth 5 fps.
+		SDL_Delay(200);
 	}
 }
 
@@ -112,14 +118,19 @@ bool handleInput(Tetromino& currentTetromino) {
 		else if (e.type = SDL_KEYDOWN) {
 			switch (e.key.keysym.sym) {
 			case SDLK_UP:
+				currentTetromino.rotateRight(*board);
 				break;
 			case SDLK_DOWN:
+				currentTetromino.rotateLeft(*board);
 				break;
 			case SDLK_LEFT:
-				currentTetromino.moveLeft();
+				currentTetromino.moveLeft(*board);
 				break;
 			case SDLK_RIGHT:
-				currentTetromino.moveRight();
+				currentTetromino.moveRight(*board);
+				break;
+			case SDLK_SPACE:
+				currentTetromino.drop(*board);
 				break;
 			default:
 				break;

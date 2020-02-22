@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "Board.h"
 #include "Rectangle.h"
 
 using namespace std;
@@ -14,22 +15,25 @@ public:
 	~Tetromino();
 
 	// General methods.
-	bool fall();
-	void moveLeft();
-	void moveRight();
-	bool collision();
+	bool fall(Board& board);
+	void moveLeft(Board& board);
+	void moveRight(Board& board);
+	void rotateLeft(Board& board);
+	void rotateRight(Board& board);
+	void drop(Board& board);
+	bool collision(Board& board);
 
 	// Getters.
 	SquareType getSquare(int x, int y);
 
+private:
 	int x;
 	int y;
-
-private:
 	int tetrominoSize;
 	vector<vector<SquareType>> shape;
 
 	// Private methods.
 	bool isWithin(int x, int y);
+	void becomeBoard(Board& board);
 };
 

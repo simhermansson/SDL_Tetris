@@ -20,15 +20,16 @@ public:
 	void initSurfaceMap();
 	void draw(SDL_Surface *windowSurface);
 	void drawSquare(SquareType squareType, SDL_Surface *windowSurface);
-	int posX();
-	int posY();
 
 	// Setters.
 	void setSquareType(SquareType squareType);
 
 	// Getters.
+	int posX();
+	int posY();
 	int getWidth();
 	int getHeight();
+	SquareType getSquareType();
 
 private:
 	// Positioning variables.

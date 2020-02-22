@@ -8,5 +8,6 @@ enum SquareType {
 	O,
 	S,
 	T,
-	Z
+	Z,
+	OUTSIDE
 };

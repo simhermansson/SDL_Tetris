@@ -10,30 +10,90 @@ Tetromino::Tetromino(int x, int y, int tetrominoSize, vector<vector<SquareType>>
 Tetromino::~Tetromino() {
 }
 
-bool Tetromino::fall() {
+bool Tetromino::fall(Board& board) {
 	y++;
-	if (collision()) {
+	if (collision(board)) {
 		y--;
+		becomeBoard(board);
 		return false;
 	}
 	return true;
 }
 
-void Tetromino::moveLeft() {
+void Tetromino::moveLeft(Board& board) {
 	x--;
-	if (collision()) {
+	if (collision(board)) {
 		x++;
 	}
 }
 
-void Tetromino::moveRight() {
+void Tetromino::moveRight(Board& board) {
 	x++;
-	if (collision()) {
+	if (collision(board)) {
 		x--;
 	}
 }
 
-bool Tetromino::collision() {
+void Tetromino::rotateLeft(Board& board) {
+	vector<vector<SquareType>> newShape = {
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY}
+	};
+	vector<vector<SquareType>> oldShape = shape;
+
+	for (int i = 0; i < tetrominoSize; i++) {
+		for (int j = 0; j < tetrominoSize; j++) {
+			newShape[j][tetrominoSize-1-i] = shape[i][j];
+		}
+	}
+
+	shape = newShape;
+	if (collision(board)) shape = oldShape;
+}
+
+void Tetromino::rotateRight(Board& board) {
+	vector<vector<SquareType>> newShape = {
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, EMPTY, EMPTY}
+	};
+	vector<vector<SquareType>> oldShape = shape;
+
+	for (int i = 0; i < tetrominoSize; i++) {
+		for (int j = 0; j < tetrominoSize; j++) {
+			newShape[j][i] = shape[i][tetrominoSize - 1 - j];
+		}
+	}
+
+	shape = newShape;
+	if (collision(board)) shape = oldShape;
+}
+
+void Tetromino::drop(Board& board) {
+
+}
+
+void Tetromino::becomeBoard(Board& board) {
+	for (int i = 0; i < tetrominoSize; i++) {
+		for (int j = 0; j < tetrominoSize; j++) {
+			if (shape[i][j] != EMPTY) {
+				board.getRectangleAt(x + j, y + i)->setSquareType(shape[i][j]);
+			}
+		}
+	}
+}
+
+bool Tetromino::collision(Board& board) {
+	for (int i = 0; i < tetrominoSize; i++) {
+		for (int j = 0; j < tetrominoSize; j++) {
+			if (shape[i][j] != EMPTY && board.getRectangleAt(x + j, y + i)->getSquareType() != EMPTY) {
+				return true;
+			}
+		}
+	}
 	return false;
 }
 

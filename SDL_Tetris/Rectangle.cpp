@@ -54,6 +54,10 @@ void Rectangle::drawSquare(SquareType squareType, SDL_Surface *windowSurface) {
 	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
 }
 
+SquareType Rectangle::getSquareType() {
+	return squareType;
+}
+
 int Rectangle::posX() { return x; }
 
 int Rectangle::posY() { return y; }
