@@ -13,8 +13,10 @@ public:
 	~Board();
 
 	// General methods.
-	void draw(SDL_Surface *surface);
 	void initBoard();
+
+	// Getters.
+	Rectangle* getRectangleAt(int x, int y);
 
 private:
 	int width;

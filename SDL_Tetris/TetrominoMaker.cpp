@@ -20,29 +20,29 @@ void TetrominoMaker::initShapes() {
 	};
 }
 
-Tetromino TetrominoMaker::getRandomTetromino() {
+Tetromino TetrominoMaker::getRandomTetromino(int x, int y) {
 	Tetromino tetromino;
 	switch (rand() % NUM_OF_TETROMINOES) {
 	case 0:
-		tetromino = Tetromino(getTetrominoI());
+		tetromino = Tetromino(x, y, 4, getTetrominoI());
 		break;
 	case 1:
-		tetromino = Tetromino(getTetrominoJ());
+		tetromino = Tetromino(x, y, 3, getTetrominoJ());
 		break;
 	case 2:
-		tetromino = Tetromino(getTetrominoL());
+		tetromino = Tetromino(x, y, 3, getTetrominoL());
 		break;
 	case 3:
-		tetromino = Tetromino(getTetrominoO());
+		tetromino = Tetromino(x, y, 2, getTetrominoO());
 		break;
 	case 4:
-		tetromino = Tetromino(getTetrominoS());
+		tetromino = Tetromino(x, y, 3, getTetrominoS());
 		break;
 	case 5:
-		tetromino = Tetromino(getTetrominoT());
+		tetromino = Tetromino(x, y, 3, getTetrominoT());
 		break;
 	case 6:
-		tetromino = Tetromino(getTetrominoZ());
+		tetromino = Tetromino(x, y, 3, getTetrominoZ());
 		break;
 	}
 	return tetromino;
@@ -51,7 +51,7 @@ Tetromino TetrominoMaker::getRandomTetromino() {
 vector<vector<SquareType>> TetrominoMaker::getTetrominoI() {
 	return vector<vector<SquareType>> {
 		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{I, I, I, I},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -59,8 +59,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoI() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoJ() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{J, EMPTY, EMPTY, EMPTY},
+		{J, J, J, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -68,8 +68,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoJ() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoL() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, EMPTY, L, EMPTY},
+		{L, L, L, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -77,8 +77,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoL() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoO() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, O, O, EMPTY},
+		{EMPTY, O, O, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -86,8 +86,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoO() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoS() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, S, S, EMPTY},
+		{S, S, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -95,8 +95,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoS() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoT() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{EMPTY, T, EMPTY, EMPTY},
+		{T, T, T, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -104,8 +104,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoT() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoZ() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
+		{Z, Z, EMPTY, EMPTY},
+		{EMPTY, Z, Z, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};

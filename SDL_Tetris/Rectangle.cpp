@@ -44,9 +44,20 @@ bool Rectangle::loadSurface() {
 	return success;
 }
 
-void Rectangle::draw(SDL_Surface* windowSurface) {
+void Rectangle::draw(SDL_Surface *windowSurface) {
 	SDL_FillRect(surface, NULL, surfaceMap[squareType]);
 	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
+}
+
+void Rectangle::drawSquareAt(int x, int y, SquareType squareType, SDL_Surface *windowSurface) {
+	int oldX = rectangle.x;
+	int oldY = rectangle.y;
+	rectangle.x = x * width;
+	rectangle.y = y * height;
+	SDL_FillRect(surface, NULL, surfaceMap[squareType]);
+	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
+	rectangle.x = oldX;
+	rectangle.y = oldY;
 }
 
 int Rectangle::posX() { return x; }

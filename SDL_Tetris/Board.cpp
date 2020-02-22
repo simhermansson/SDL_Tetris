@@ -13,15 +13,6 @@ Board::~Board() {
 
 }
 
-void Board::draw(SDL_Surface *surface) {
-	// Call draw on background rectangles.
-	for (auto &row : board) {
-		for (auto &rect : row) {
-			rect.draw(surface);
-		}
-	}
-}
-
 void Board::initBoard() {
 	// Init rectangles.
 	for (int i = 0; i < height; i++) {
@@ -32,4 +23,8 @@ void Board::initBoard() {
 		}
 		board.push_back(row);
 	}
+}
+
+Rectangle* Board::getRectangleAt(int x, int y) {
+	return &board[x][y];
 }

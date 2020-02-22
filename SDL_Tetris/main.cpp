@@ -15,6 +15,8 @@ const int GAME_WIDTH = 10;
 const int GAME_HEIGHT = 20;
 const int RECTANGLE_WIDTH = SCREEN_WIDTH / GAME_WIDTH;
 const int RECTANGLE_HEIGHT = SCREEN_HEIGHT / GAME_HEIGHT;
+const int TETROMINO_START_X = 5;
+const int TETROMINO_START_Y = 5;
 
 // Rendering window.
 SDL_Window* gWindow = NULL;
@@ -27,9 +29,9 @@ Board *board;
 // Function headers.
 void splashScreen();
 void gameLoop();
-bool handleCollision();
-void draw();
-bool handleInput();
+void draw(Tetromino& currentTetromino);
+void drawRect(int x, int y, Tetromino& currentTetromino);
+bool handleInput(Tetromino& currentTetromino);
 bool init();
 bool loadMedia();
 SDL_Surface* loadSurface(const std::string& path);
@@ -58,34 +60,47 @@ void splashScreen() {
 void gameLoop() {
 	// Init board;
 	board = new Board(GAME_WIDTH, GAME_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+	// Init the tetrominoMaker and the first tetromino.
 	TetrominoMaker tetrominoMaker;
-	Tetromino currentTetromino = tetrominoMaker.getRandomTetromino();
+	Tetromino currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
 
 	// Main game loop.
-	while (!handleInput()) {
-		if (handleCollision()) {
-			currentTetromino = tetrominoMaker.getRandomTetromino();
+	while (!handleInput(currentTetromino)) {
+		if (!currentTetromino.fall()) {
+			currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
 		}
-		draw();
+		draw(currentTetromino);
+
+		// Delay for 1 second in order to facilitate a smooth 1 fps.
+		SDL_Delay(1000);
 	}
 }
 
-bool handleCollision() {
-	return false;
-}
-
-void draw() {
+void draw(Tetromino& currentTetromino) {
 	// Clear screen.
-	SDL_FillRect(gSplashScreen, NULL, 0x000000);
+	SDL_FillRect(gScreenSurface, NULL, 0x000000);
 
-	// Call draw on board;
-	board->draw(gScreenSurface);
+	// Draw board and tetromino.
+	for (int i = 0; i < GAME_WIDTH; i++) {
+		for (int j = 0; j < GAME_HEIGHT; j++) {
+			drawRect(i, j, currentTetromino);
+		}
+	}
 
 	// Update window.
 	SDL_UpdateWindowSurface(gWindow);
 }
 
-bool handleInput() {
+void drawRect(int x, int y, Tetromino& currentTetromino) {
+	if (currentTetromino.getSquare(x, y) != EMPTY) {
+		board->getRectangleAt(x, y)->drawSquareAt(x, y, currentTetromino.getSquare(x, y), gScreenSurface);
+	}
+	else {
+		board->getRectangleAt(x, y)->draw(gScreenSurface);
+	}
+}
+
+bool handleInput(Tetromino& currentTetromino) {
 	bool quit = false;
 
 	// Event handler.
@@ -101,8 +116,10 @@ bool handleInput() {
 			case SDLK_DOWN:
 				break;
 			case SDLK_LEFT:
+				currentTetromino.moveLeft();
 				break;
 			case SDLK_RIGHT:
+				currentTetromino.moveRight();
 				break;
 			default:
 				break;

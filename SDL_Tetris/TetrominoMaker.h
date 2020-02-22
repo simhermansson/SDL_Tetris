@@ -14,7 +14,7 @@ public:
 	~TetrominoMaker();
 
 	// Getters.
-	Tetromino getRandomTetromino();
+	Tetromino getRandomTetromino(int x, int y);
 
 private:
 	// Constants.
