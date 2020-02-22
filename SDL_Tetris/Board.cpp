@@ -16,7 +16,7 @@ Board::~Board() {
 void Board::initBoard() {
 	// Init rectangles.
 	for (int i = 0; i < height; i++) {
-		vector<Rectangle> row(width);
+		vector<Rectangle> row;
 		for (int j = 0; j < width; j++) {
 			Rectangle rectangle(j * rectWidth, i * rectHeight, rectWidth, rectHeight);
 			row.push_back(rectangle);
@@ -26,5 +26,5 @@ void Board::initBoard() {
 }
 
 Rectangle* Board::getRectangleAt(int x, int y) {
-	return &board[x][y];
+	return &board[y][x];
 }

@@ -45,6 +45,6 @@ bool Tetromino::isWithin(int x, int y) {
 SquareType Tetromino::getSquare(int x, int y) {
 	if (!isWithin(x, y)) return EMPTY;
 	else {
-		return shape[x - this->x][y - this->y];
+		return shape[y - this->y][x - this->x];
 	}
 }

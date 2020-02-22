@@ -22,9 +22,10 @@ public:
 	// Getters.
 	SquareType getSquare(int x, int y);
 
-private:
 	int x;
 	int y;
+
+private:
 	int tetrominoSize;
 	vector<vector<SquareType>> shape;
 

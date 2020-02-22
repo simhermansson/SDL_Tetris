@@ -19,7 +19,7 @@ public:
 	bool loadSurface();
 	void initSurfaceMap();
 	void draw(SDL_Surface *windowSurface);
-	void drawSquareAt(int x, int y, SquareType squareType, SDL_Surface *windowSurface);
+	void drawSquare(SquareType squareType, SDL_Surface *windowSurface);
 	int posX();
 	int posY();
 

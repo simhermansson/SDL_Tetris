@@ -30,7 +30,7 @@ void Rectangle::initSurfaceMap() {
 		{I, 0xFF0000},
 		{J, 0x0FF000},
 		{L, 0x00FF00},
-		{O, 0x000FF0},
+		{O, 0x0F0FF0},
 		{S, 0x0000FF},
 		{T, 0x0F000F},
 		{Z, 0xF0F00F}
@@ -49,15 +49,9 @@ void Rectangle::draw(SDL_Surface *windowSurface) {
 	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
 }
 
-void Rectangle::drawSquareAt(int x, int y, SquareType squareType, SDL_Surface *windowSurface) {
-	int oldX = rectangle.x;
-	int oldY = rectangle.y;
-	rectangle.x = x * width;
-	rectangle.y = y * height;
+void Rectangle::drawSquare(SquareType squareType, SDL_Surface *windowSurface) {
 	SDL_FillRect(surface, NULL, surfaceMap[squareType]);
 	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
-	rectangle.x = oldX;
-	rectangle.y = oldY;
 }
 
 int Rectangle::posX() { return x; }

@@ -16,7 +16,7 @@ const int GAME_HEIGHT = 20;
 const int RECTANGLE_WIDTH = SCREEN_WIDTH / GAME_WIDTH;
 const int RECTANGLE_HEIGHT = SCREEN_HEIGHT / GAME_HEIGHT;
 const int TETROMINO_START_X = 5;
-const int TETROMINO_START_Y = 5;
+const int TETROMINO_START_Y = 1;
 
 // Rendering window.
 SDL_Window* gWindow = NULL;
@@ -81,9 +81,9 @@ void draw(Tetromino& currentTetromino) {
 	SDL_FillRect(gScreenSurface, NULL, 0x000000);
 
 	// Draw board and tetromino.
-	for (int i = 0; i < GAME_WIDTH; i++) {
-		for (int j = 0; j < GAME_HEIGHT; j++) {
-			drawRect(i, j, currentTetromino);
+	for (int i = 0; i < GAME_HEIGHT; i++) {
+		for (int j = 0; j < GAME_WIDTH; j++) {
+			drawRect(j, i, currentTetromino);
 		}
 	}
 
@@ -93,7 +93,7 @@ void draw(Tetromino& currentTetromino) {
 
 void drawRect(int x, int y, Tetromino& currentTetromino) {
 	if (currentTetromino.getSquare(x, y) != EMPTY) {
-		board->getRectangleAt(x, y)->drawSquareAt(x, y, currentTetromino.getSquare(x, y), gScreenSurface);
+		board->getRectangleAt(x, y)->drawSquare(currentTetromino.getSquare(x, y), gScreenSurface);
 	}
 	else {
 		board->getRectangleAt(x, y)->draw(gScreenSurface);

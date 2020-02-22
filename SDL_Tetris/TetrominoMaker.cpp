@@ -77,8 +77,8 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoL() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoO() {
 	return vector<vector<SquareType>> {
-		{EMPTY, O, O, EMPTY},
-		{EMPTY, O, O, EMPTY},
+		{O, O, EMPTY, EMPTY},
+		{O, O, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
