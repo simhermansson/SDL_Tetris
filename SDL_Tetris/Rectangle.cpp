@@ -7,19 +7,34 @@ Rectangle::Rectangle(int x, int y, int width, int height) {
 	this->width = width;
 	this->height = height;
 
-	// Set drawing rectangle variables.
-	this->squareType = EMPTY;
-	if (!loadSurface()) {
-		printf("Failed to load rectangle surface! SDL_Error: %s\n", SDL_GetError());
-	}
 	this->rectangle.x = x;
 	this->rectangle.y = y;
 	this->rectangle.w = width;
 	this->rectangle.h = height;
+
+	// Set drawing rectangle variables.
+	initSurfaceMap();
+	this->squareType = EMPTY;
+	if (!loadSurface()) {
+		printf("Failed to load rectangle surface! SDL_Error: %s\n", SDL_GetError());
+	}
 }
 
 Rectangle::~Rectangle() {
 
+}
+
+void Rectangle::initSurfaceMap() {
+	surfaceMap = {
+		{EMPTY, 0x000000},
+		{I, 0xFF0000},
+		{J, 0x0FF000},
+		{L, 0x00FF00},
+		{O, 0x000FF0},
+		{S, 0x0000FF},
+		{T, 0x0F000F},
+		{Z, 0xF0F00F}
+	};
 }
 
 bool Rectangle::loadSurface() {
@@ -30,6 +45,7 @@ bool Rectangle::loadSurface() {
 }
 
 void Rectangle::draw(SDL_Surface* windowSurface) {
+	SDL_FillRect(surface, NULL, surfaceMap[squareType]);
 	SDL_BlitScaled(surface, NULL, windowSurface, &rectangle);
 }
 

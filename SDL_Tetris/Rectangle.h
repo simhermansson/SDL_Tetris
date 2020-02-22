@@ -2,8 +2,11 @@
 
 #include <SDL.h>
 #include <stdio.h>
+#include <unordered_map>
 
 #include "SquareType.h"
+
+using namespace std;
 
 class Rectangle {
 
@@ -14,6 +17,7 @@ public:
 
 	// General methods.
 	bool loadSurface();
+	void initSurfaceMap();
 	void draw(SDL_Surface* windowSurface);
 	int posX();
 	int posY();
@@ -33,6 +37,7 @@ private:
 	int height;
 
 	// Drawing variables.
+	unordered_map<SquareType, int> surfaceMap;
 	SquareType squareType;
 	SDL_Rect rectangle;
 	SDL_Surface* surface;

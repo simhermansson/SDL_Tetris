@@ -1,11 +1,11 @@
 #include "Tetromino.h"
 
-Tetromino::Tetromino(vector<vector<Rectangle>> *shape) {
+Tetromino::Tetromino(vector<vector<SquareType>> shape) {
 	this->shape = shape;
 }
 
 Tetromino::~Tetromino() {
-	free(shape);
+
 }
 
 bool Tetromino::collision() {

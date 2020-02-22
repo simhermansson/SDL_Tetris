@@ -2,7 +2,11 @@
 
 enum SquareType {
 	EMPTY,
-	RED,
-	BLUE,
-	GREEN
+	I,
+	J,
+	L,
+	O,
+	S,
+	T,
+	Z
 };

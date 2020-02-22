@@ -9,13 +9,14 @@ using namespace std;
 class Tetromino {
 
 public:
-	Tetromino(vector<vector<Rectangle>> *shape);
+	Tetromino() = default;
+	Tetromino(vector<vector<SquareType>> shape);
 	~Tetromino();
 
 	// Methods.
 	bool collision();
 
 private:
-	vector<vector<Rectangle>> *shape;
+	vector<vector<SquareType>> shape;
 };
 

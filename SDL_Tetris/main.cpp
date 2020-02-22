@@ -5,6 +5,8 @@
 
 #include "Rectangle.h"
 #include "Board.h"
+#include "Tetromino.h"
+#include "TetrominoMaker.h"
 
 // Constants.
 const int SCREEN_WIDTH = 400;
@@ -25,6 +27,7 @@ Board *board;
 // Function headers.
 void splashScreen();
 void gameLoop();
+bool handleCollision();
 void draw();
 bool handleInput();
 bool init();
@@ -46,20 +49,29 @@ int main(int argc, char* args[]) {
 }
 
 void splashScreen() {
-	// Blit splash screen and show for 3 seconds.
+	// Blit splash screen and show for 2 seconds.
 	SDL_BlitSurface(gSplashScreen, NULL, gScreenSurface, NULL);
 	SDL_UpdateWindowSurface(gWindow);
-	SDL_Delay(3000);
+	SDL_Delay(2000);
 }
 
 void gameLoop() {
 	// Init board;
 	board = new Board(GAME_WIDTH, GAME_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+	TetrominoMaker tetrominoMaker;
+	Tetromino currentTetromino = tetrominoMaker.getRandomTetromino();
 
 	// Main game loop.
 	while (!handleInput()) {
+		if (handleCollision()) {
+			currentTetromino = tetrominoMaker.getRandomTetromino();
+		}
 		draw();
 	}
+}
+
+bool handleCollision() {
+	return false;
 }
 
 void draw() {
@@ -68,13 +80,6 @@ void draw() {
 
 	// Call draw on board;
 	board->draw(gScreenSurface);
-
-	// Call draw on tetrominoes.
-	/*
-	for (Tetronimo t : gTetronimos) {
-		t.draw(gScreenSurface);
-	}
-	*/
 
 	// Update window.
 	SDL_UpdateWindowSurface(gWindow);
@@ -156,7 +161,7 @@ SDL_Surface* loadSurface(const std::string& path) {
 
 void close() {
 	// Free board.
-	free(board);
+	delete board;
 
 	// Deallocate surface.
 	SDL_FreeSurface(gScreenSurface);

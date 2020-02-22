@@ -126,14 +126,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Tetromino.cpp" />
-    <ClCompile Include="TetronimoMaker.cpp" />
+    <ClCompile Include="TetrominoMaker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SquareType.h" />
     <ClInclude Include="Tetromino.h" />
-    <ClInclude Include="TetronimoMaker.h" />
+    <ClInclude Include="TetrominoMaker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
