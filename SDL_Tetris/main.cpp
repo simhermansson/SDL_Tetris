@@ -65,20 +65,35 @@ void gameLoop() {
 	Tetromino currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
 
 	// Main game loop.
-	while (!handleInput(currentTetromino)) {
-		draw(currentTetromino);
-
-		// Update tetromino and check for collisions.
-		if (!currentTetromino.fall(*board)) {
-			currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
-			// Check if player has lost.
-			if (currentTetromino.collision(*board)) {
-				break;
-			}
+	unsigned int lastTime = 0, lastDrawTime = 0, currentTime;
+	while (true) {
+		// Check for player input and if player wants to exit.
+		if (handleInput(currentTetromino)) {
+			break;
 		}
 
-		// Delay for 0.2 second in order to facilitate a smooth 5 fps.
-		SDL_Delay(200);
+		currentTime = SDL_GetTicks();
+		// Draw for 60 fps.
+		if (currentTime > lastDrawTime + 1000 / 60) {
+			lastDrawTime = currentTime;
+			draw(currentTetromino);
+		}
+		// Handle falling down.
+		if (currentTime > lastTime + 500) {
+			lastTime = currentTime;
+
+			/* 
+			* Update tetromino y position and check for collisions.
+			* Create new tetromino if collision detected and end game if new one collides as well.
+			*/
+			if (!currentTetromino.fall(*board)) {
+				currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
+				// Check if player has lost.
+				if (currentTetromino.collision(*board)) {
+					break;
+				}
+			}
+		}
 	}
 }
 
@@ -115,13 +130,13 @@ bool handleInput(Tetromino& currentTetromino) {
 		if (e.type == SDL_QUIT) {
 			quit = true;
 		}
-		else if (e.type = SDL_KEYDOWN) {
+		else if (e.type == SDL_KEYDOWN) {
 			switch (e.key.keysym.sym) {
 			case SDLK_UP:
-				currentTetromino.rotateRight(*board);
+				currentTetromino.rotateLeft(*board);
 				break;
 			case SDLK_DOWN:
-				currentTetromino.rotateLeft(*board);
+				currentTetromino.rotateRight(*board);
 				break;
 			case SDLK_LEFT:
 				currentTetromino.moveLeft(*board);
@@ -131,8 +146,6 @@ bool handleInput(Tetromino& currentTetromino) {
 				break;
 			case SDLK_SPACE:
 				currentTetromino.drop(*board);
-				break;
-			default:
 				break;
 			}
 		}
