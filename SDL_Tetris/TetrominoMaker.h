@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <time.h>
 #include <unordered_map>
 
 #include "Tetromino.h"
@@ -11,7 +12,6 @@ class TetrominoMaker {
 
 public:
 	TetrominoMaker();
-	~TetrominoMaker();
 
 	// Getters.
 	Tetromino getRandomTetromino(int x, int y);

@@ -13,7 +13,6 @@ class Rectangle {
 public:
 	Rectangle() = default;
 	Rectangle(int x, int y, int width, int height);
-	~Rectangle();
 
 	// General methods.
 	bool loadSurface();

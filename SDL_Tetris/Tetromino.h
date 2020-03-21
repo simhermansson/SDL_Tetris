@@ -15,13 +15,14 @@ public:
 	~Tetromino();
 
 	// General methods.
-	bool fall(Board& board);
+	void fall(Board& board);
 	void moveLeft(Board& board);
 	void moveRight(Board& board);
 	void rotateLeft(Board& board);
 	void rotateRight(Board& board);
 	void drop(Board& board);
 	bool collision(Board& board);
+	bool isPartOfBoard();
 
 	// Getters.
 	SquareType getSquare(int x, int y);
@@ -30,6 +31,7 @@ private:
 	int x;
 	int y;
 	int tetrominoSize;
+	bool partOfBoard;
 	vector<vector<SquareType>> shape;
 
 	// Private methods.

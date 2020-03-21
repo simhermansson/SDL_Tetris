@@ -4,20 +4,19 @@ Tetromino::Tetromino(int x, int y, int tetrominoSize, vector<vector<SquareType>>
 	this->x = x;
 	this->y = y;
 	this->tetrominoSize = tetrominoSize;
+	this->partOfBoard = false;
 	this->shape = shape;
 }
 
 Tetromino::~Tetromino() {
 }
 
-bool Tetromino::fall(Board& board) {
+void Tetromino::fall(Board& board) {
 	y++;
 	if (collision(board)) {
 		y--;
 		becomeBoard(board);
-		return false;
 	}
-	return true;
 }
 
 void Tetromino::moveLeft(Board& board) {
@@ -73,10 +72,13 @@ void Tetromino::rotateRight(Board& board) {
 }
 
 void Tetromino::drop(Board& board) {
-
+	while (!collision(board)) y++;
+	y--;
+	becomeBoard(board);
 }
 
 void Tetromino::becomeBoard(Board& board) {
+	this->partOfBoard = true;
 	for (int i = 0; i < tetrominoSize; i++) {
 		for (int j = 0; j < tetrominoSize; j++) {
 			if (shape[i][j] != EMPTY) {
@@ -84,6 +86,7 @@ void Tetromino::becomeBoard(Board& board) {
 			}
 		}
 	}
+	board.findCompleteRows();
 }
 
 bool Tetromino::collision(Board& board) {
@@ -95,6 +98,10 @@ bool Tetromino::collision(Board& board) {
 		}
 	}
 	return false;
+}
+
+bool Tetromino::isPartOfBoard() {
+	return this->partOfBoard;
 }
 
 bool Tetromino::isWithin(int x, int y) {

@@ -20,20 +20,16 @@ Rectangle::Rectangle(int x, int y, int width, int height) {
 	}
 }
 
-Rectangle::~Rectangle() {
-
-}
-
 void Rectangle::initSurfaceMap() {
 	surfaceMap = {
 		{EMPTY, 0x000000},
-		{I, 0xFF0000},
-		{J, 0x0FF000},
-		{L, 0x00FF00},
-		{O, 0x0F0FF0},
-		{S, 0x0000FF},
-		{T, 0x0F000F},
-		{Z, 0xF0F00F}
+		{I, 0x2DC7CC},
+		{J, 0x0341AE},
+		{L, 0xFF971C},
+		{O, 0xFFD500},
+		{S, 0x72CB3B},
+		{T, 0xEF2098},
+		{Z, 0xFF3213}
 	};
 }
 

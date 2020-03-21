@@ -1,11 +1,8 @@
 #include "TetrominoMaker.h"
 
 TetrominoMaker::TetrominoMaker() {
+	srand(time(NULL));
 	initShapes();
-}
-
-TetrominoMaker::~TetrominoMaker() {
-
 }
 
 void TetrominoMaker::initShapes() {
@@ -50,8 +47,8 @@ Tetromino TetrominoMaker::getRandomTetromino(int x, int y) {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoI() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{I, I, I, I},
+		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY},
 		{EMPTY, EMPTY, EMPTY, EMPTY}
 	};
@@ -59,54 +56,47 @@ vector<vector<SquareType>> TetrominoMaker::getTetrominoI() {
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoJ() {
 	return vector<vector<SquareType>> {
-		{J, EMPTY, EMPTY, EMPTY},
-		{J, J, J, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{J, EMPTY, EMPTY},
+		{J, J, J},
+		{EMPTY, EMPTY, EMPTY}
 	};
 }
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoL() {
 	return vector<vector<SquareType>> {
-		{EMPTY, EMPTY, L, EMPTY},
-		{L, L, L, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{EMPTY, EMPTY, L},
+		{L, L, L},
+		{EMPTY, EMPTY, EMPTY}
 	};
 }
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoO() {
 	return vector<vector<SquareType>> {
-		{O, O, EMPTY, EMPTY},
-		{O, O, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{O, O},
+		{O, O}
 	};
 }
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoS() {
 	return vector<vector<SquareType>> {
-		{EMPTY, S, S, EMPTY},
-		{S, S, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{EMPTY, S, S},
+		{S, S, EMPTY},
+		{EMPTY, EMPTY, EMPTY}
 	};
 }
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoT() {
 	return vector<vector<SquareType>> {
-		{EMPTY, T, EMPTY, EMPTY},
-		{T, T, T, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{EMPTY, T, EMPTY},
+		{T, T, T},
+		{EMPTY, EMPTY, EMPTY}
 	};
 }
 
 vector<vector<SquareType>> TetrominoMaker::getTetrominoZ() {
 	return vector<vector<SquareType>> {
-		{Z, Z, EMPTY, EMPTY},
-		{EMPTY, Z, Z, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY},
-		{EMPTY, EMPTY, EMPTY, EMPTY}
+		{Z, Z, EMPTY},
+		{EMPTY, Z, Z},
+		{EMPTY, EMPTY, EMPTY}
 	};
 }

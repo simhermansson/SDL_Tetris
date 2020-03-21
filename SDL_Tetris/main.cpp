@@ -16,7 +16,7 @@ const int GAME_HEIGHT = 20;
 const int RECTANGLE_WIDTH = SCREEN_WIDTH / GAME_WIDTH;
 const int RECTANGLE_HEIGHT = SCREEN_HEIGHT / GAME_HEIGHT;
 const int TETROMINO_START_X = 5;
-const int TETROMINO_START_Y = 1;
+const int TETROMINO_START_Y = 0;
 
 // Rendering window.
 SDL_Window* gWindow = NULL;
@@ -73,26 +73,25 @@ void gameLoop() {
 		}
 
 		currentTime = SDL_GetTicks();
-		// Draw for 60 fps.
+		// Handle falling down.
+		if (!currentTetromino.isPartOfBoard() && currentTime > lastTime + 500) {
+			lastTime = currentTime;
+			currentTetromino.fall(*board);
+		}
+
+		//Create new tetromino if collision detected and end game if new one collides as well.
+		if (currentTetromino.isPartOfBoard()) {
+			currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
+			// Check if player has lost.
+			if (currentTetromino.collision(*board)) {
+				break;
+			}
+		}
+
+		// Draw game.
 		if (currentTime > lastDrawTime + 1000 / 60) {
 			lastDrawTime = currentTime;
 			draw(currentTetromino);
-		}
-		// Handle falling down.
-		if (currentTime > lastTime + 500) {
-			lastTime = currentTime;
-
-			/* 
-			* Update tetromino y position and check for collisions.
-			* Create new tetromino if collision detected and end game if new one collides as well.
-			*/
-			if (!currentTetromino.fall(*board)) {
-				currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
-				// Check if player has lost.
-				if (currentTetromino.collision(*board)) {
-					break;
-				}
-			}
 		}
 	}
 }

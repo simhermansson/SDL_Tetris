@@ -10,10 +10,10 @@ class Board {
 
 public:
 	Board(int width, int height, int rectWidth, int rectHeight);
-	~Board();
 
 	// General methods.
 	void initBoard();
+	void findCompleteRows();
 
 	// Getters.
 	Rectangle* getRectangleAt(int x, int y);
@@ -23,6 +23,9 @@ private:
 	int height;
 	int rectWidth;
 	int rectHeight;
+
+	// Private methods.
+	void removeRow(int row);
 
 	vector<vector<Rectangle>> board;
 };
