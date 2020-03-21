@@ -59,7 +59,7 @@ void splashScreen() {
 
 void gameLoop() {
 	// Init board;
-	board = new Board(GAME_WIDTH, GAME_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+	board = new Board(GAME_WIDTH, GAME_HEIGHT, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, gScreenSurface);
 	// Init the tetrominoMaker and the first tetromino.
 	TetrominoMaker tetrominoMaker;
 	Tetromino currentTetromino = tetrominoMaker.getRandomTetromino(TETROMINO_START_X, TETROMINO_START_Y);
@@ -97,10 +97,7 @@ void gameLoop() {
 }
 
 void draw(Tetromino& currentTetromino) {
-	// Clear screen.
-	SDL_FillRect(gScreenSurface, NULL, 0x000000);
-
-	// Draw board and tetromino.
+	// Draw board and tetrominoes.
 	for (int i = 0; i < GAME_HEIGHT; i++) {
 		for (int j = 0; j < GAME_WIDTH; j++) {
 			drawRect(j, i, currentTetromino);

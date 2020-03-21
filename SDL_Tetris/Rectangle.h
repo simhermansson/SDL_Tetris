@@ -12,10 +12,10 @@ class Rectangle {
 
 public:
 	Rectangle() = default;
-	Rectangle(int x, int y, int width, int height);
+	Rectangle(int x, int y, int width, int height, SDL_Surface *screen);
 
 	// General methods.
-	bool loadSurface();
+	bool loadSurface(SDL_Surface *screen);
 	void initSurfaceMap();
 	void draw(SDL_Surface *windowSurface);
 	void drawSquare(SquareType squareType, SDL_Surface *windowSurface);
@@ -41,6 +41,6 @@ private:
 	unordered_map<SquareType, int> surfaceMap;
 	SquareType squareType;
 	SDL_Rect rectangle;
-	SDL_Surface* surface;
+	SDL_Surface *surface;
 };
 

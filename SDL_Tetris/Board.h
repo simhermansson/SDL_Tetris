@@ -9,7 +9,7 @@ using namespace std;
 class Board {
 
 public:
-	Board(int width, int height, int rectWidth, int rectHeight);
+	Board(int width, int height, int rectWidth, int rectHeight, SDL_Surface *screen);
 
 	// General methods.
 	void initBoard();
@@ -23,6 +23,7 @@ private:
 	int height;
 	int rectWidth;
 	int rectHeight;
+	SDL_Surface *screen;
 
 	// Private methods.
 	void removeRow(int row);

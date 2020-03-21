@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int width, int height) {
+Rectangle::Rectangle(int x, int y, int width, int height, SDL_Surface *screen) {
 	// Set basic size and position variables.
 	this->x = x;
 	this->y = y;
@@ -15,14 +15,14 @@ Rectangle::Rectangle(int x, int y, int width, int height) {
 	// Set drawing rectangle variables.
 	initSurfaceMap();
 	this->squareType = EMPTY;
-	if (!loadSurface()) {
+	if (!loadSurface(screen)) {
 		printf("Failed to load rectangle surface! SDL_Error: %s\n", SDL_GetError());
 	}
 }
 
 void Rectangle::initSurfaceMap() {
 	surfaceMap = {
-		{EMPTY, 0x000000},
+		{EMPTY, 0xC3C3C3},
 		{I, 0x2DC7CC},
 		{J, 0x0341AE},
 		{L, 0xFF971C},
@@ -33,9 +33,11 @@ void Rectangle::initSurfaceMap() {
 	};
 }
 
-bool Rectangle::loadSurface() {
+bool Rectangle::loadSurface(SDL_Surface *screen) {
 	bool success = true;
-	this->surface = SDL_LoadBMP("rectangle.bmp");
+	this->surface = SDL_CreateRGBSurface(surfaceMap[squareType], width, height, screen->format->BitsPerPixel,
+										 screen->format->Rmask, screen->format->Gmask,
+										 screen->format->Bmask, screen->format->Amask);
 	if (surface == NULL) success = false;
 	return success;
 }

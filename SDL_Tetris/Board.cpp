@@ -1,10 +1,11 @@
 #include "Board.h"
 
-Board::Board(int width, int height, int rectWidth, int rectHeight) {
+Board::Board(int width, int height, int rectWidth, int rectHeight, SDL_Surface *screen) {
 	this->width = width;
 	this->height = height;
 	this->rectWidth = rectWidth;
 	this->rectHeight = rectHeight;
+	this->screen = screen;
 
 	initBoard();
 }
@@ -14,7 +15,7 @@ void Board::initBoard() {
 	for (int i = 2; i > 0; i--) {
 		vector<Rectangle> upperBounds;
 		for (int j = -1; j <= width; j++) {
-			Rectangle rectangle(j * rectWidth, i * -rectHeight, rectWidth, rectHeight);
+			Rectangle rectangle(j * rectWidth, i * -rectHeight, rectWidth, rectHeight, screen);
 			rectangle.setSquareType(OUTSIDE);
 			upperBounds.push_back(rectangle);
 		}
@@ -25,7 +26,7 @@ void Board::initBoard() {
 	for (int i = 0; i < height; i++) {
 		vector<Rectangle> row;
 		for (int j = -1; j <= width; j++) {
-			Rectangle rectangle(j * rectWidth, i * rectHeight, rectWidth, rectHeight);
+			Rectangle rectangle(j * rectWidth, i * rectHeight, rectWidth, rectHeight, screen);
 			if (j == -1 || j == width) rectangle.setSquareType(OUTSIDE);
 			row.push_back(rectangle);
 		}
@@ -36,7 +37,7 @@ void Board::initBoard() {
 	for (int i = 0; i < 2; i++) {
 		vector<Rectangle> lowerBounds;
 		for (int j = -1; j <= width; j++) {
-			Rectangle rectangle(j * rectWidth, (height + i) * rectHeight, rectWidth, rectHeight);
+			Rectangle rectangle(j * rectWidth, (height + i) * rectHeight, rectWidth, rectHeight, screen);
 			rectangle.setSquareType(OUTSIDE);
 			lowerBounds.push_back(rectangle);
 		}
