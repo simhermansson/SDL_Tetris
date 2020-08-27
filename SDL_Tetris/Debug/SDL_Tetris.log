@@ -1,0 +1,8 @@
+﻿  Board.cpp
+  main.cpp
+  Rectangle.cpp
+  Tetromino.cpp
+  TetrominoMaker.cpp
+d:\vs_dev_lib\sdl_tetris\sdl_tetris\tetrominomaker.cpp(4): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  SDL_Tetris.vcxproj -> D:\vs_dev_lib\SDL_Tetris\Debug\SDL_Tetris.exe
